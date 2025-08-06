@@ -16,16 +16,30 @@ const example = stylex.create({
       default: "red",
     },
   },
-  dynamic: () => ({
+  dynamicMedia: () => ({
     backgroundColor: {
       "@media (min-width:1024px)": "purple",
       default: "gray",
+    },
+  }),
+  dynamicConditional: () => ({
+    fontSize: {
+      ":is([data-hovered])": 45,
+      default: 35,
     },
   }),
 });
 
 export default function Home() {
   return (
-    <h1 {...stylex.props(example.static, example.dynamic())}>Hello world</h1>
+    <h1
+      {...stylex.props(
+        example.static,
+        example.dynamicMedia(),
+        example.dynamicConditional()
+      )}
+    >
+      Hello world
+    </h1>
   );
 }
